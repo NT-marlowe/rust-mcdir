@@ -13,6 +13,10 @@ Naoya Tezuka & Takuto Nishimura
 
 ---
 
+# TOML
+
+---
+
 # TOMLってなんですか？
 ## TOML = Tom’s Obvious, Minimal Language
 Tomさん = このフォーマットを考案したうちの一人，Tom Preston-Wernerのこと
@@ -145,8 +149,65 @@ TOML：簡単
 
 ---
 # TOMLのまとめ
-
-
+- TOMLは人間に優しいフォーマット
+    - 読み書きしやすい
+    - コメントも書ける
+    - 仕様が小さい
+- 機械にも優しい
+    - パースしやすい
+- JSONとYAMLのいいとこどり
 ---
 
 # `Cargo.toml`
+
+---
+
+# `Cargo.toml`はmanifest file
+manifest file = パッケージのメタデータを格納するファイル
+```toml
+# example of Cargo.toml
+[package]
+name = "hello_world" # the name of the package
+version = "0.1.0"    # the current version, obeying semver
+edition = "2021"
+authors = "Sekai Aisatsu<helloWorld@example.com>"
+
+[dependencies]
+serde_json = "1.0"
+
+[build-dependencies]
+structopt = "0.3"
+```
+全内容の一覧は[ここ](https://doc.rust-lang.org/cargo/reference/manifest.html#the-authors-field)
+
+---
+
+# `Cargo.toml`の役割
+## $\simeq$パッケージマネージャ`Cargo`の設定ファイル 
+- 依存ライブラリとそのバージョン
+- ビルドターゲットのパスの指定
+- コンパイル時のフラグ指定
+- `features`(条件付きコンパイル)や`option`の指定
+
+などを`Cargo.toml`に記述すれば，後は`Cargo`におまかせ！
+
+---
+
+# `cargo-edit`を使おう
+- `Cargo.toml`は`cargo-edit`を使って編集できるよ
+    -  もちろん、みんな各自のエディタから直接いじることもできるんだけど...
+- `$ cargo upgrade`というコマンドを叩けば、`[dependencies]`にあるパッケージのバージョンを自動で更新してくれる！！
+- `features`の追加も`--features`フラグで可能
+
+---
+
+# `cargo-edit`の使い方
+- `$ cargo add {パッケージ名}`：tomlにパッケージを追加する。バージョンを指定しても良いし、指定しなければ最新のものが追加される。
+- `$ cargo rm {パッケージ名}`：tomlファイルに記載されているパッケージを削除する
+- `$ cargo upgrade {パッケージ名}`：tomlファイルの特定のパッケージを最新(または指定したバージョン)にアップデート
+
+公式ドキュメントは[ここ](https://crates.io/crates/cargo-edit)
+
+---
+
+# `Cargo.toml`まとめ

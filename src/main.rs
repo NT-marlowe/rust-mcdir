@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::time;
 
 fn main() {
     println!("mkdir and cd");
@@ -15,5 +16,6 @@ fn main() {
     }   
     
     println!("commandline args = {:?}" , argv);
+    println!("time = {:?}", time::Duration::from_secs(5));
 }
 
